@@ -2,21 +2,30 @@ package Homework_2;
 
 public class Plate {
     private int food;
+
     public Plate(int food) {
-        this.food = food;
-    }
-    public void info() {
-        System.out.println("plate: " + food);
+        this.setFood(food);
     }
 
+    public void info() {
+        System.out.println("Тарелка с количеством еды = " + food);
+    }
 
     public int getFood() {
-    return food;
+        return food;
     }
-    public void setFood(int i) {
-        return;
+
+    public void setFood(int food) {
+        if (food >= 0) {
+            this.food = food;
+        } else {
+            this.food = 0;
+        }
     }
-    public void addFood() {
-        System.out.println("Добавьте еще еды!" );
+
+    public void addFood(int additionalFood) {
+        if (additionalFood > 0) {
+            this.food += additionalFood;
+        }
     }
 }

@@ -10,34 +10,38 @@ package Homework_2;
 // Добавить в тарелку метод, с помощью которого можно было бы добавлять еду в тарелку.
 
 
+import java.util.Scanner;
+
 public class MainClass {
     public static void main(String[] args) {
-        // Cat cat = new Cat("Barsik", 5, false);
 
         Cat[] cats = new Cat[3];
-        cats[0] = new Cat("Рыжик", 20, false);
-        cats[1] = new Cat("Серик", 10, false);
-        cats[2] = new Cat("Чарлик", 7, false);
-         
-        
+        cats[0] = new Cat("Чарлик", 7);
+        cats[1] = new Cat("Серик", 10);
+        cats[2] = new Cat("Рыжик", 20);
 
         Plate plate = new Plate(18);
         plate.info();
-            for (int i = 0; i < cats.length; i++) {
-                if (cats[i].satiety() == false && cats[i].getAppetite() < plate.getFood()){
-                cats[i].eat(plate);
-                cats[i].satiety = true;
-                System.out.println(cats[i].getName() + " наелся.");
-            } else {
-                System.out.println(cats[i].getName() + " не поел!");
-                System.out.println("Сколько еды добавить еще в миску?");
-                
-                // plate.setFood(plate.getFood() - cats[i].getAppetite());
-                
-                System.out.println(cats[i].getAppetite() - plate.getFood());
-                plate.addFood();
-                System.out.println();
-         }
-      }
+
+        Scanner scanner = new Scanner(System.in);
+        for (Cat cat : cats) {
+            cat.eat(plate);
+            if (!cat.isFull()) {
+                System.out.println("Введите количество еды для добавления в тарелку :");
+                plate.addFood(Integer.parseInt(scanner.nextLine()));
+                //попробовать накормить ненаевшихся котов снова, каждого голодного кота с одной попытки 
+                cat.eat(plate);
+            }
+        }
+        scanner.close();
     }
 }
+
+
+// Тарелка с количеством еды = 18
+// Чарлик наелся.
+// Серик наелся.
+// Коту Рыжик не хватило еды на тарелке.
+// Введите количество еды для добавления в тарелку :
+// 67
+// Рыжик наелся.
